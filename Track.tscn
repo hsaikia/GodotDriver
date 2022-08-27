@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/TrackMesh.gd" type="Script" id=1]
+[ext_resource path="res://track.tres" type="Material" id=2]
+
+
+[node name="Track" type="Spatial"]
+
+[node name="TrackMesh" type="MeshInstance" parent="."]
+cast_shadow = 0
+script = ExtResource( 1 )
+material = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 3, 0 )
+current = true
