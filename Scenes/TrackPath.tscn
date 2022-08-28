@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/ProceduralPath.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TrackPath.gd" type="Script" id=2]
-[ext_resource path="res://Assets/texture_road.png" type="Texture" id=3]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -11,15 +10,10 @@ _data = {
 }
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.372549, 0.372549, 0.372549, 1 )
-albedo_texture = ExtResource( 3 )
+albedo_color = Color( 0.25098, 0.25098, 0.25098, 1 )
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.517647, 0.0156863, 0.0156863, 1 )
-
-[sub_resource type="CapsuleMesh" id=4]
-
-[sub_resource type="CapsuleShape" id=5]
 
 [node name="TrackPath" type="Spatial"]
 script = ExtResource( 2 )
@@ -29,42 +23,35 @@ curve = SubResource( 1 )
 script = ExtResource( 1 )
 
 [node name="Road" type="CSGPolygon" parent="ProceduralPath"]
-invert_faces = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+use_collision = true
 polygon = PoolVector2Array( -3, 0, -3, 0.1, 3, 0.1, 3, 0 )
 mode = 2
 path_node = NodePath("..")
+path_interval_type = 0
 path_interval = 1.0
+path_simplify_angle = 0.0
 path_rotation = 2
 path_local = false
 path_continuous_u = false
+path_u_distance = 1.0
 path_joined = true
 material = SubResource( 2 )
 
 [node name="Kerbs" type="CSGPolygon" parent="ProceduralPath"]
-visible = false
 use_collision = true
-invert_faces = true
 polygon = PoolVector2Array( -4, 0, -4, 1, -3, 1, -3, 0, 3, 0, 3, 1, 4, 1, 4, 0 )
 mode = 2
 path_node = NodePath("..")
+path_interval_type = 0
 path_interval = 1.0
+path_simplify_angle = 0.0
 path_rotation = 2
 path_local = false
 path_continuous_u = false
+path_u_distance = 1.0
 path_joined = true
 material = SubResource( 3 )
-
-[node name="PathFollow" type="PathFollow" parent="ProceduralPath"]
-
-[node name="KinematicBody" type="KinematicBody" parent="ProceduralPath/PathFollow"]
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="ProceduralPath/PathFollow/KinematicBody"]
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="ProceduralPath/PathFollow/KinematicBody"]
-shape = SubResource( 5 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -50, 160, -50 )

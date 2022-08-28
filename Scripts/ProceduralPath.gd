@@ -23,16 +23,18 @@ func generate_path():
 	smoothen()
 	curve.clear_points()
 	for v in vertices:
-		curve.add_point(v - vertices[0])
+		#curve.add_point(v - vertices[0])
+		curve.add_point(v)
 	print("Path with " + str(curve.get_point_count()) + " vertices created")
 	var n = vertices.size()
-	#start_pos = vertices[0]
-	# go clockwise or counter clockwise at random
-	var dir_idx = rand_gen.randi_range(0, 1)
-	if dir_idx == 0:
-		next_pos = vertices[1]
-	else:
-		next_pos = vertices[n - 1]
+	start_pos = vertices[0]
+	next_pos = vertices[n - 1]
+#	# go clockwise or counter clockwise at random
+#	var dir_idx = rand_gen.randi_range(0, 1)
+#	if dir_idx == 0:
+#		next_pos = vertices[1]
+#	else:
+#		next_pos = vertices[n - 1]
 	
 
 func sample_ellipse():
